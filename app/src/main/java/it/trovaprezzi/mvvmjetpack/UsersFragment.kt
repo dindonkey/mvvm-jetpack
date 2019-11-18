@@ -13,6 +13,11 @@ class UsersFragment : Fragment() {
     private lateinit var usersFragmentBinding: UsersFragmentBinding
     private lateinit var usersViewModel: UsersViewModel
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        usersViewModel.start()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,6 +33,11 @@ class UsersFragment : Fragment() {
 
         usersViewModel = ViewModelProviders.of(this)[UsersViewModel::class.java]
         usersFragmentBinding.lifecycleOwner = this
+
+//        si può fare anche così
+//        viewDataBinding = AddtaskFragBinding.bind(root).apply {
+//            this.viewmodel = viewModel
+//        }
         usersFragmentBinding.viewModel = usersViewModel
 
         return usersFragmentBinding.root

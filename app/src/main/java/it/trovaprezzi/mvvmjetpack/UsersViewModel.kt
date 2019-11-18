@@ -3,5 +3,9 @@ package it.trovaprezzi.mvvmjetpack
 import androidx.lifecycle.ViewModel
 
 class UsersViewModel: ViewModel() {
-    val user = User("pollo")
+    lateinit var user: User
+
+    fun start() {
+        user = User("cicciopollo")
+    }
 }

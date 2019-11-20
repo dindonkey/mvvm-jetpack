@@ -13,11 +13,6 @@ class UsersFragment : Fragment() {
     private lateinit var usersFragmentBinding: UsersFragmentBinding
     private lateinit var usersViewModel: UsersViewModel
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        usersViewModel.start()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

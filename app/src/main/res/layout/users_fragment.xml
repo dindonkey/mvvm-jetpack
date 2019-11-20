@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
+        <import type="it.trovaprezzi.mvvmjetpack.Status"/>
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="it.trovaprezzi.mvvmjetpack.UsersViewModel" />
@@ -13,7 +15,12 @@
 
         <TextView
             android:id="@+id/name"
-            android:text="@{viewModel.user.name}"
+            android:text="@{viewModel.user.data.name}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ProgressBar
+            android:visibility="@{viewModel.user.status == Status.LOADING ? View.VISIBLE : View.GONE}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

@@ -1,11 +1,17 @@
 package it.trovaprezzi.mvvmjetpack
 
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class UsersViewModel: ViewModel() {
-    lateinit var user: User
+    val user: LiveData<Result<User>> = liveData {
+        emit(Result.loading(null))
+        emit(Result.success(fetchUser()))
+    }
 
-    fun start() {
-        user = User("cicciopollo")
+    suspend fun fetchUser(): User {
+        delay(5000)
+        return User("pippo")
     }
 }

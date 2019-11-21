@@ -1,17 +1,33 @@
 package it.trovaprezzi.mvvmjetpack
 
+import android.util.Log.d
 import androidx.lifecycle.*
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlin.random.Random
 
-class UsersViewModel: ViewModel() {
-    val user: LiveData<Result<User>> = liveData {
-        emit(Result.loading(null))
-        emit(Result.success(fetchUser()))
+class UsersViewModel : ViewModel() {
+    private val reloadTrigger = MutableLiveData<Boolean>()
+
+    init {
+        reload()
+    }
+
+    val user: LiveData<Result<User>> = Transformations.switchMap(reloadTrigger) {
+        liveData {
+            emit(Result.loading(null))
+            emit(Result.success(fetchUser()))
+        }
     }
 
     suspend fun fetchUser(): User {
+        val nextInt = Random.nextInt(0, 100)
+        d("DEBUGG!!!", "start fetch user" + nextInt)
         delay(5000)
-        return User("pippo")
+        d("DEBUGG!!!", "end fetch user"+ nextInt)
+        return User("pippo" + nextInt)
+    }
+
+    fun reload() {
+        reloadTrigger.value = true
     }
 }

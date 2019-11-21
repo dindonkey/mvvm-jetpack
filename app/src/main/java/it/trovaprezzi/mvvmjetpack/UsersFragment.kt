@@ -29,10 +29,7 @@ class UsersFragment : Fragment() {
         usersViewModel = ViewModelProviders.of(this)[UsersViewModel::class.java]
         usersFragmentBinding.lifecycleOwner = this
 
-//        si può fare anche così
-//        viewDataBinding = AddtaskFragBinding.bind(root).apply {
-//            this.viewmodel = viewModel
-//        }
+        // TODO: studiare perchè viene fatto in OnViewCreated su un field autoCleared
         usersFragmentBinding.viewModel = usersViewModel
 
         return usersFragmentBinding.root

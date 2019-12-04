@@ -8,6 +8,11 @@ import kotlin.random.Random
 class UsersViewModel : ViewModel() {
     private val reloadTrigger = MutableLiveData<Boolean>()
 
+    private val _navigateToTodos = MutableLiveData<Event<Boolean>>()
+    val navigateToTodos : LiveData<Event<Boolean>>
+        get() = _navigateToTodos
+
+
     init {
         reload()
     }
@@ -29,5 +34,9 @@ class UsersViewModel : ViewModel() {
 
     fun reload() {
         reloadTrigger.value = true
+    }
+
+    fun clickOnUser() {
+        _navigateToTodos.value = Event(true)
     }
 }
